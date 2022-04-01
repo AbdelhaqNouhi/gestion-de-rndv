@@ -1,7 +1,7 @@
 <template>
 <Nav title="Reserve Now"/>
 <div class="hh">
-    <div class="col-11 col-lg-6 login">
+    <div class="col-11 col-lg-6 p-0 login">
         <form>
             <label>Nom</label>
             <input required type="text" name="nom" placeholder="Nom" v-model="nom">
@@ -67,7 +67,7 @@ export default {
     // margin: auto 0;
     display: flex;
     justify-content: center;
-    height: 75vh;
+    // height: 75vh;
     margin: 82px 0;
 }
 .login{
