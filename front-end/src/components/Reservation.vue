@@ -1,7 +1,7 @@
 <template>
 <Nav title="Reserve Now"/>
 <div class="hh">
-    <div class="col-11 col-lg-8 login">
+    <div class="col-11 col-lg-8 reserve">
         <div class="new">
             <div class="n">
                 <p>New Reservation</p>
@@ -37,7 +37,7 @@ export default {
     height: 80vh;
     margin: 82px 0;
 }
-.login{
+.reserve{
     display: flex;
     flex-direction: column;
     gap: 2rem;
