@@ -1,8 +1,9 @@
 <template>
 <Nav title="Reserve Now"/>
 <div class="hh">
-    <div class="col-11 col-lg-6 login">
+    <div class="col-11 col-lg-6 p-0 login">
         <form>
+        <h3>Sing_in</h3>
             <label>Nom</label>
                 <input type="text" name="nom" placeholder="Nom">
                 <label>Prenome</label>
@@ -23,7 +24,7 @@
 
 <script>
 import Nav from "../components/Nav";
-import Footer from './Footer.vue';
+import Footer from "./Footer.vue";
 export default {
     name: "Sing_up",
     components: {
@@ -38,7 +39,6 @@ export default {
     // margin: auto 0;
     display: flex;
     justify-content: center;
-    height: 58vh;
     margin: 82px 0;
 }
 .login{
@@ -72,6 +72,10 @@ form{
     justify-content: center;
     flex-direction: column;
     // width: 5rem;
+
+    h3{
+        margin-bottom: 2rem;
+    }
 
 }
     input{
