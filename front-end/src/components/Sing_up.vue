@@ -1,18 +1,17 @@
 <template>
 <Nav title="Reserve Now"/>
 <div class="hh">
-    <div class="col-11 col-lg-6 p-0 login">
+    <div class="col-11 col-lg-6 login">
         <form>
-        <h3>Sing_in</h3>
             <label>Nom</label>
-                <input type="text" name="nom" placeholder="Nom">
-                <label>Prenome</label>
-                <input type="text" name="prenome" placeholder="Prenome">
-                <label>Age</label>
-                <input type="text" name="age" placeholder="Age">
-                <label>Profession</label>
-                <input type="text" name="profession" placeholder="Profession">
-            <input class="botton" type="submit" name="regester" value="Regester">
+            <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+            <label>Prenome</label>
+            <input required type="text" name="prenome" placeholder="Prenome" v-model="prenom">
+            <label>Age</label>
+            <input required type="text" name="age" placeholder="Age" v-model="age">
+            <label>Profession</label>
+            <input required type="text" name="profession" placeholder="Profession" v-model="profession">
+            <input href="./Login.vue" class="botton" type="submit" name="regester" value="Regester" @click.prevent="register_client">
         </form>
         <div class="description">
             <p>Welcom Dear</p>
@@ -68,6 +67,7 @@ export default {
     // margin: auto 0;
     display: flex;
     justify-content: center;
+    height: 75vh;
     margin: 82px 0;
 }
 .login{
@@ -101,10 +101,6 @@ form{
     justify-content: center;
     flex-direction: column;
     // width: 5rem;
-
-    h3{
-        margin-bottom: 2rem;
-    }
 
 }
     input{
