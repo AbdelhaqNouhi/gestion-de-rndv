@@ -10,7 +10,7 @@
 import Nav from "../components/Nav";
 import Login from "../components/Login";
 import Footer from '@/components/Footer.vue';
-import Reservation from '@/components/Reservation.vue';
+import Reservation from "@/components/Reservation.vue";
 export default {
     name: "App",
     components: {

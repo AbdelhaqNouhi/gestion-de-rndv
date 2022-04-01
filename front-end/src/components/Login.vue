@@ -1,6 +1,6 @@
 <template>
 <div class="hh">
-    <div class="col-11 col-lg-6 login">
+    <div class="col-11 col-lg-6 p-0 login">
         <form>
         <h3>Sing_in</h3>
             <label>Référence</label>

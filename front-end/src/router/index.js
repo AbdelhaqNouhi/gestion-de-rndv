@@ -18,7 +18,7 @@ const routes = [
         path: "/sing_up",
         name: "Sing_up",
         component: Sing_up,
-    }
+    },
 ];
 
 const router = createRouter({
