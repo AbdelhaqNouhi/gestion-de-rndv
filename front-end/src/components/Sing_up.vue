@@ -31,6 +31,35 @@ export default {
         Nav,
         Footer,
     },
+    data() {
+        return {
+            nom: "",
+            prenom: "",
+            age: "",
+            profession: "",
+            reference_client: ""
+        };
+    },
+    methods: {
+        register_client() {
+            fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
+                method: "post",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+            nom: this.nom,
+          prenom: this.prenom,
+          age: this.age,
+          profession: this.profession,
+          reference_client: this.nom + this.age
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => alert(data));
+        
+    },
+  },
 }
 </script>
 
