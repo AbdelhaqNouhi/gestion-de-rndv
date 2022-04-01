@@ -4,14 +4,14 @@
     <div class="col-11 col-lg-6 login">
         <form>
             <label>Nom</label>
-                <input type="text" name="nom" placeholder="Nom">
-                <label>Prenome</label>
-                <input type="text" name="prenome" placeholder="Prenome">
-                <label>Age</label>
-                <input type="text" name="age" placeholder="Age">
-                <label>Profession</label>
-                <input type="text" name="profession" placeholder="Profession">
-            <input class="botton" type="submit" name="regester" value="Regester">
+            <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+            <label>Prenome</label>
+            <input required type="text" name="prenome" placeholder="Prenome" v-model="prenom">
+            <label>Age</label>
+            <input required type="text" name="age" placeholder="Age" v-model="age">
+            <label>Profession</label>
+            <input required type="text" name="profession" placeholder="Profession" v-model="profession">
+            <input href="./Login.vue" class="botton" type="submit" name="regester" value="Regester" @click.prevent="register_client">
         </form>
         <div class="description">
             <p>Welcom Dear</p>
@@ -30,6 +30,35 @@ export default {
         Nav,
         Footer,
     },
+    data() {
+        return {
+            nom: "",
+            prenom: "",
+            age: "",
+            profession: "",
+            reference_client: ""
+        };
+    },
+    methods: {
+    register_client() {
+      fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          nom: this.nom,
+          prenom: this.prenom,
+          age: this.age,
+          profession: this.profession,
+          reference_client: this.nom + this.age
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => alert(data));
+        
+    },
+  },
 }
 </script>
 
@@ -38,7 +67,7 @@ export default {
     // margin: auto 0;
     display: flex;
     justify-content: center;
-    height: 58vh;
+    height: 75vh;
     margin: 82px 0;
 }
 .login{
