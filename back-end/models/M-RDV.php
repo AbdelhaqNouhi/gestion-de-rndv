@@ -83,7 +83,7 @@
         public function modifier_rdv()
         {
             // request
-            $sql = "UPDATE rdv SET sujet=:sujet, date=:date, creneau=:creneau WHERE id=:id";
+            $sql = "UPDATE rdv SET sujet=:sujet, date=:date, creneau=:creneau, client_Id=:client_Id WHERE id=:id";
 
             // prepare request
             $stmt = $this->conn->prepare($sql);
@@ -93,6 +93,7 @@
             $stmt->bindParam(':sujet', $this->sujet);
             $stmt->bindParam(':date', $this->date);
             $stmt->bindParam(':creneau', $this->creneau);
+            $stmt->bindParam(':client_Id', $this->client_Id);
             
             // exectute  
             $result = $stmt->execute();

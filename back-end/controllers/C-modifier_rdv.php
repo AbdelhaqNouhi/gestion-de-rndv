@@ -25,6 +25,8 @@
     $rdv->sujet = $data->sujet;
     $rdv->date = $data->date;
     $rdv->creneau = $data->creneau;
+    $rdv->client_Id = $data->client_Id;
+
 
 
     
