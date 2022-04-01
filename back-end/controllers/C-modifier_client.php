@@ -28,7 +28,7 @@
     $client->profession = $data->profession;
     $client->reference_client = $data->reference_client;
 
-    if ($client->modifier_client()) {
+    if ($client->Modifier_Client()) {
         echo json_encode(
             array('message' => "la modification a été effectuer")
         );

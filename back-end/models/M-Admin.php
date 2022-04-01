@@ -18,7 +18,7 @@
             $this->conn = $DB;
         }
 
-        public function modifier_client()
+        public function Modifier_Client()
         {
             // request
             $sql = "UPDATE rdv SET nom=:nom, prenom=:prenom, age=:age, profession=:profession, reference_client=:reference_client WHERE id=:id";

@@ -4,8 +4,8 @@
         <form>
         <h3>Sing_in</h3>
             <label>Référence</label>
-                <input type="text" name="Référence" placeholder="Référence">
-            <input class="botton" type="submit" name="reserve" value="Reserve">
+                <input type="text" name="Référence" placeholder="Référence" v-model="reference_client">
+                <input href="./Reservation.vue" class="botton" type="submit" name="reserve" value="Reserve" @click.prevent="login_client">
         </form>
         <div class="description">
             <p>Welcom Dear</p>
@@ -15,9 +15,37 @@
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
     name: "Login",
-}
+    data() {
+        return {
+            reference_client: ""
+        };
+    },
+    methods: {
+        login_client() {
+            fetch("http://localhost/gestion-rndv/back-end/controllers/C-loginClient.php", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    reference_client: this.reference_client,
+                })
+            })
+            .then((res) => res.json())
+            .then((data) => {
+            if ((this.reference_client == data.reference_client.reference_client)) {
+                console.log(data.reference_client.reference_client);
+            }else{
+                alert("Reference incorrect")
+            }
+            });
+        },
+    }
+};
 </script>
 
 <style  lang="scss" scoped>
