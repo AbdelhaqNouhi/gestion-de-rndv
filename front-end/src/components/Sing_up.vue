@@ -24,7 +24,7 @@
 
 <script>
 import Nav from "../components/Nav";
-import Footer from "./Footer.vue";
+import Footer from './Footer.vue';
 export default {
     name: "Sing_up",
     components: {
@@ -41,14 +41,14 @@ export default {
         };
     },
     methods: {
-        register_client() {
-            fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
-                method: "post",
+    register_client() {
+      fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
+        method: "post",
         headers: {
-            "Content-type": "application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
-            nom: this.nom,
+          nom: this.nom,
           prenom: this.prenom,
           age: this.age,
           profession: this.profession,
