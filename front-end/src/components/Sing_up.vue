@@ -1,17 +1,17 @@
 <template>
 <Nav title="Reserve Now"/>
 <div class="hh">
-    <div class="col-11 col-lg-6 login">
+    <div class="col-11 col-lg-6 p-0 login">
         <form>
             <label>Nom</label>
-            <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+            <input type="text" name="nom" placeholder="Nom" v-model="nom">
             <label>Prenome</label>
-            <input required type="text" name="prenome" placeholder="Prenome" v-model="prenom">
+            <input type="text" name="prenome" placeholder="Prenome" v-model="prenom">
             <label>Age</label>
-            <input required type="text" name="age" placeholder="Age" v-model="age">
+            <input type="text" name="age" placeholder="Age" v-model="age">
             <label>Profession</label>
-            <input required type="text" name="profession" placeholder="Profession" v-model="profession">
-            <input href="./Login.vue" class="botton" type="submit" name="regester" value="Regester" @click.prevent="register_client">
+            <input type="text" name="profession" placeholder="Profession" v-model="profession">
+            <input class="botton" type="submit" name="regester" value="Regester" @click.prevent="register_client">
         </form>
         <div class="description">
             <p>Welcom Dear</p>
@@ -47,6 +47,7 @@ export default {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
+          
           nom: this.nom,
           prenom: this.prenom,
           age: this.age,
@@ -56,7 +57,7 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => alert(data));
-        
+        this.$router.push('/');
     },
   },
 }

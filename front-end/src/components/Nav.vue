@@ -4,7 +4,6 @@
         <h1 class="col-4">{{title}}</h1>
             <router-link to="/">Home</router-link> 
             <router-link to="Reservation">Reservation</router-link>
-            <!-- "{name:'Reservation' ,params:{username: 'erina' }}" -->
             <router-link to="Sing_up"><button>Regester</button></router-link>
     </div>
     </nav>
