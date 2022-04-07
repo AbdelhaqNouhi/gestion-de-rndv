@@ -18,10 +18,14 @@
             $this->conn = $DB;
         }
 
+        public function lireun_client() {
+            
+        }
+
         public function Modifier_Client()
         {
             // request
-            $sql = "UPDATE rdv SET nom=:nom, prenom=:prenom, age=:age, profession=:profession, reference_client=:reference_client WHERE id=:id";
+            $sql = "UPDATE client SET nom=:nom, prenom=:prenom, age=:age, profession=:profession, reference_client=:reference_client WHERE id=:id";
 
             // prepare request
             $stmt = $this->conn->prepare($sql);
@@ -35,7 +39,7 @@
             $stmt->bindParam(':reference_client', $this->reference_client);
 
             // exectute  
-            return $stmt->execute();;
+            return $stmt->execute();
         }
 
         public function supprimer_client()
@@ -52,4 +56,6 @@
             // exectute  
             return $stmt->execute();
         }
+
+
     }

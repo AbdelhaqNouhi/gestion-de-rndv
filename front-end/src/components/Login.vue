@@ -4,10 +4,11 @@
         <form>
         <h3>Sing_in</h3>
                 <input type="text" name="Référence" placeholder="Référence as client" v-model="reference_client">
-                <input class="botton" type="submit" name="reserve" value="Submit as client" @click.prevent="login_client">        </form>
+                <input class="botton" type="submit" name="reserve" value="Submit as client" @click.prevent="login_client">        
+        </form>
         <div class="description">
             <input class="margadm" type="text" name="Référence" placeholder="Référence as admin" v-model="reference_admin">
-            <input class="botton" type="submit" name="reserve" value="Submit as admin" @click.prevent="login_admin">
+            <input class="botton buttadm" type="submit" name="reserve" value="Submit as admin" @click.prevent="login_admin">
         </div>
     </div>
 </div>
@@ -16,7 +17,8 @@
 <script>
 import Cookies from "js-cookie";
 import { ref } from "vue";
-
+import swal from 'sweetalert';
+import Cookies from 'js-cookie';
 export default {
     name: "Login",
     inject:["setClientId"],
@@ -28,6 +30,7 @@ export default {
     },
     methods: {
         login_client() {
+            if(this.reference_client != ""){
             fetch("http://localhost/gestion-rndv/back-end/controllers/C-loginClient.php", {
                 method: "post",
                 headers: {
@@ -45,11 +48,18 @@ export default {
                 console.log(data.reference_client.reference_client);
                 this.$router.push('/Reservation');
             }else{
-                alert("Reference incorrect")
+                swal({
+                  title: "Reference incorrect",
+                  text: "plz membre your reference",
+                  icon: "error",
+                  button: "ok",
+               });
             }
             });
+            }
         },
         login_admin() {
+            if(this.reference_admin != ""){
             fetch("http://localhost/gestion-rndv/back-end/controllers/C-login_admin.php", {
                 method: "post",
                 headers: {
@@ -62,14 +72,21 @@ export default {
             .then((res) => res.json())
             .then((data) => {
             if ((this.reference_admin == data.reference_admin.reference_admin)) {
-                console.log(data.reference_admin.reference_admin);
+                // console.log(data.reference_admin.reference_admin);
                 // console.log(reference_admin);
+                Cookies.set('reference_admin',data.reference_admin.reference_admin);
                 this.$router.push('/Dashboardadmin');
             }else{
-                alert("Reference incorrect")
+                swal({
+                  title: "Reference incorrect",
+                  text: "plz membre your reference",
+                  icon: "error",
+                  button: "ok",
+               });
             }
             });
-        }
+            }
+        },
     }
 };
 </script>
@@ -133,5 +150,11 @@ form{
 }
 .margadm {
     margin-top: 114px;
+    margin-left: 10%;
+    width: 80%;
+}
+.buttadm {
+    width: 80%;
+    margin-left: 30px;
 }
 </style>

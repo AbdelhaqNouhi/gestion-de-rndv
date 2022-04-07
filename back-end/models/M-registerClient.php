@@ -19,9 +19,9 @@
 
         public function register()
         {
-            $checkifexist = "SELECT reference_client FROM client WHERE nom = ? OR prenom = ?";
+            $checkifexist = "SELECT reference_client FROM client WHERE reference_client = ?";
             $stmt = $this->conn->prepare($checkifexist);
-            $stmt->execute([$this->nom, $this->prenom]);
+            $stmt->execute([$this->reference_client]);
             $result = $stmt->rowCount();
             
             if ($result == 0) {

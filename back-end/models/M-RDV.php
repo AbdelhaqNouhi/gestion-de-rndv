@@ -39,7 +39,16 @@
         public function lire_rdv()
         {
             // request
+<<<<<<< HEAD
             $sql = "SELECT * FROM rdv WHERE client_Id=:id";
+=======
+            $sql = "SELECT client.* ,rdv.id,rdv.sujet,rdv.date,rdv.creneau
+            FROM client
+            INNER JOIN rdv
+            ON rdv.client_Id = client.id
+            ";
+
+>>>>>>> ac3ea28 (ajouter dash admin)
             // prepare request
             $stmt = $this->conn->prepare($sql);
             

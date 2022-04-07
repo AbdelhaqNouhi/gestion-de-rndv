@@ -1,5 +1,9 @@
 <template>
     <div>
+<<<<<<< HEAD
+=======
+        <Nav title="Reserve Now" />
+>>>>>>> ac3ea28 (ajouter dash admin)
         <div class="hh">
             <div class="col-11 col-lg-10 p-0 sing_up">
                 <form class="form" @submit.prevent="Reserve">
@@ -21,7 +25,10 @@
                         <option>14 h à 14:30h</option>
                         <option>15 h à 15:30h</option>
                         <option>16 h à 16:30h</option>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac3ea28 (ajouter dash admin)
                     </select>
                     <label>Sujet</label>
                     <textarea
@@ -45,9 +52,19 @@
                         <span>{{ list.creneau }}</span>
                         <span>{{ list.sujet }}</span>
 
+<<<<<<< HEAD
                         <div v-if="lists" class="btn">
                             <button class="btn botton" @click="Update">update</button>
                             <button class="btn botton" @click="Delete(list.id)">delete</button>
+=======
+                        <div class="btn">
+                            <button class="btn botton" @click="Update">
+                                update
+                            </button>
+                            <button class="btn botton" @click="Delete(list.id)">
+                                delete
+                            </button>
+>>>>>>> ac3ea28 (ajouter dash admin)
                         </div>
                     </div>
                 </div>
@@ -64,6 +81,11 @@ import Footer from "../components/Footer";
 
 const client_Id = Cookies.get("id");
 
+<<<<<<< HEAD
+=======
+const  dele = document.getElementById("id");
+
+>>>>>>> ac3ea28 (ajouter dash admin)
 export default {
     name: "Reservation",
     components: {
@@ -74,7 +96,10 @@ export default {
         return {
             form: { date: "", creneau: "", sujet: "", client_Id: client_Id },
             lists: [],
+<<<<<<< HEAD
             id:  null,
+=======
+>>>>>>> ac3ea28 (ajouter dash admin)
         };
     },
     methods: {
