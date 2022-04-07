@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Reservation from "../components/Reservation.vue";
 import Sing_up from "../components/Sing_up.vue";
-import Dashboardadmin from "../components/Dashboardadmin.vue";
 
 const routes = [
     {
@@ -20,11 +19,6 @@ const routes = [
         name: "Sing_up",
         component: Sing_up,
     },
-    {
-        path: "/Dashboardadmin",
-        name: "Dashboardadmin",
-        component: Dashboardadmin,
-    }
 ];
 
 const router = createRouter({
