@@ -19,8 +19,10 @@
     $rdv = new RDV($db);
 
     // get donnée
-    $data = json_decode(file_get_contents("php://input"));
 
+
+    $rdv->id = $_GET["id"];
+    
     $result = $rdv->lire_rdv();
     if ($result) {
         echo json_encode(

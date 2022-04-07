@@ -1,6 +1,5 @@
 <template>
 <div class="body">
-    <Nav title="Reserve Now"/>
     <Login />
     <Footer />
 </div>
@@ -10,14 +9,14 @@
 import Nav from "../components/Nav";
 import Login from "../components/Login";
 import Footer from '@/components/Footer.vue';
-import Reservation from "@/components/Reservation.vue";
+// import Reservation from "@/components/Reservation.vue";
 export default {
     name: "App",
     components: {
         Nav,
         Login,
         Footer,
-        Reservation,
+        // Reservation,
     }, 
 }
 </script>
