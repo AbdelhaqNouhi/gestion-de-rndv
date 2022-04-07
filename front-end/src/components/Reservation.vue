@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Nav title="Reserve Now" />
         <div class="hh">
             <div class="col-11 col-lg-10 p-0 sing_up">
                 <form class="form" @submit.prevent="Reserve">
@@ -44,9 +45,13 @@
                         <span>{{ list.creneau }}</span>
                         <span>{{ list.sujet }}</span>
 
-                        <div v-if="lists" class="btn">
-                            <button class="btn botton" @click="Update">update</button>
-                            <button class="btn botton" @click="Delete(list.id)">delete</button>
+                        <div class="btn">
+                            <button class="btn botton" @click="Update">
+                                update
+                            </button>
+                            <button class="btn botton" @click="Delete(list.id)">
+                                delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -63,6 +68,8 @@ import Footer from "../components/Footer";
 
 const client_Id = Cookies.get("id");
 
+const  dele = document.getElementById("id");
+
 export default {
     name: "Reservation",
     components: {
@@ -73,7 +80,6 @@ export default {
         return {
             form: { date: "", creneau: "", sujet: "", client_Id: client_Id },
             lists: [],
-            id:  null,
         };
     },
     methods: {
@@ -85,27 +91,25 @@ export default {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(this.form)
                 }
+                
             ).then((res) => res.json());
         },
         Delete(id) {
             fetch(
                 "http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php",
                 {
-                    method: "POST",
+                    method: "delete",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ id: id }),
                 }
             ).then((res) => res.json());
         },
     },
-
-    mounted() {
-        this.id = Cookies.get("id");
-        console.log(this.id)
+    beforeCreate() {
         fetch(
-            `http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php?id=${this.id}`
-                // console.log(id)
-            ).then((res) => res.json())
+            "http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php"
+        )
+            .then((res) => res.json())
             .then((data) => {
                 this.lists = data;
             });
@@ -124,7 +128,7 @@ export default {
 .sing_up {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    height: 35rem;
     border-radius: 0.5rem;
 
     @media only screen and(min-width: 992px) {
