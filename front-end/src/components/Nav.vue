@@ -2,18 +2,32 @@
     <nav>
     <div class="container navbar">
         <h1 class="col-4">{{title}}</h1>
-            <router-link to="Dashbord">Dashbord</router-link>
-            <router-link to="/">Home</router-link> 
-            <router-link to="Reservation">Reservation</router-link>
+            <router-link v-if="clientId" to="Reservation">Reservation</router-link>
             <!-- "{name:'Reservation' ,params:{username: 'erina' }}" -->
-            <router-link to="Sing_up"><button>Regester</button></router-link>
+            <router-link to="Sing_up" v-if="!clientId"><button>Regester</button></router-link>
+            <button @click="logout" v-if="clientId">logout</button>
     </div>
     </nav>
 </template>
 
 <script>
+import Cookies from "js-cookie";
+
 export default {
     name: "Nav",
+    inject:["clientId","setClientId"],
+    data(){
+        return {
+            clientId: this.clientId
+        }
+    },
+    methods:{
+        logout(){
+            Cookies.remove("id");
+            this.setClientId("");
+            this.$router.replace("/")
+        }
+    },
     props:{
         title: String,
     },

@@ -15,10 +15,12 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 import { ref } from "vue";
 
 export default {
     name: "Login",
+    inject:["setClientId"],
     data() {
         return {
             reference_client: ""
@@ -38,7 +40,10 @@ export default {
             .then((res) => res.json())
             .then((data) => {
             if ((this.reference_client == data.reference_client.reference_client)) {
+                Cookies.set('id',data.reference_client.id)
+                this.setClientId(data.reference_client.id);
                 console.log(data.reference_client.reference_client);
+                this.$router.push('/Reservation');
             }else{
                 alert("Reference incorrect")
             }
