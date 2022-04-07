@@ -3,12 +3,11 @@
     <div class="col-11 col-lg-6 p-0 login">
         <form>
         <h3>Sing_in</h3>
-            <label>Référence</label>
-                <input type="text" name="Référence" placeholder="Référence" v-model="reference_client">
-                <input href="./Reservation.vue" class="botton" type="submit" name="reserve" value="Reserve" @click.prevent="login_client">
-        </form>
+                <input type="text" name="Référence" placeholder="Référence as client" v-model="reference_client">
+                <input class="botton" type="submit" name="reserve" value="Submit as client" @click.prevent="login_client">        </form>
         <div class="description">
-            <p>Welcom Dear</p>
+            <input class="margadm" type="text" name="Référence" placeholder="Référence as admin" v-model="reference_admin">
+            <input class="botton" type="submit" name="reserve" value="Submit as admin" @click.prevent="login_admin">
         </div>
     </div>
 </div>
@@ -23,7 +22,8 @@ export default {
     inject:["setClientId"],
     data() {
         return {
-            reference_client: ""
+            reference_client: "",
+            reference_admin: ""
         };
     },
     methods: {
@@ -49,6 +49,27 @@ export default {
             }
             });
         },
+        login_admin() {
+            fetch("http://localhost/gestion-rndv/back-end/controllers/C-login_admin.php", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    reference_admin: this.reference_admin,
+                })
+            })
+            .then((res) => res.json())
+            .then((data) => {
+            if ((this.reference_admin == data.reference_admin.reference_admin)) {
+                console.log(data.reference_admin.reference_admin);
+                // console.log(reference_admin);
+                this.$router.push('/Dashboardadmin');
+            }else{
+                alert("Reference incorrect")
+            }
+            });
+        }
     }
 };
 </script>
@@ -109,5 +130,8 @@ form{
 .botton{
     color: white;
     background-color: #1A374D;
+}
+.margadm {
+    margin-top: 114px;
 }
 </style>

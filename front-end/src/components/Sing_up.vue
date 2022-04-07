@@ -59,6 +59,7 @@ export default {
             "Content-type": "application/json",
         },
         body: JSON.stringify({
+          
           nom: this.nom,
           prenom: this.prenom,
           age: this.age,
