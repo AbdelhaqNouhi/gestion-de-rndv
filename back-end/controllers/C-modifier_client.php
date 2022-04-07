@@ -16,12 +16,13 @@
     $db = $database->connect();
 
     // Instansiation  
-    $rdv = new ADMIN($db);
+    $client = new ADMIN($db);
 
     // get donnée
     $data = json_decode(file_get_contents("php://input"));
 
     // push data into properties
+    $client->id = $_GET['id'];
     $client->nom = $data->nom;
     $client->prenom = $data->prenom;
     $client->age = $data->age;

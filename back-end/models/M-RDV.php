@@ -38,9 +38,9 @@
         public function lire_rdv()
         {
             // request
-            $sql = "SELECT rdv.* ,client.nom,client.prenom,client.age,client.profession,client.reference_client
-            FROM rdv
-            INNER JOIN client
+            $sql = "SELECT client.* ,rdv.id,rdv.sujet,rdv.date,rdv.creneau
+            FROM client
+            INNER JOIN rdv
             ON rdv.client_Id = client.id
             ";
 

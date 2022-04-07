@@ -22,6 +22,7 @@
     $data = json_decode(file_get_contents("php://input"));
 
     // push data into properties
+    $rdv->id = $data['id'];
     $rdv->sujet = $data->sujet;
     $rdv->date = $data->date;
     $rdv->creneau = $data->creneau;
