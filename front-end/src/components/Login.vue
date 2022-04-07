@@ -3,6 +3,7 @@
     <div class="col-11 col-lg-6 p-0 login">
         <form>
         <h3>Sing_in</h3>
+            <label>Référence</label>
                 <input type="text" name="Référence" placeholder="Référence as client" v-model="reference_client">
                 <input class="botton" type="submit" name="reserve" value="Submit as client" @click.prevent="login_client">        
         </form>

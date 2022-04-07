@@ -23,9 +23,9 @@
     $data = json_decode(file_get_contents("php://input"));
 
     // push data into properties
-    $rdv->sujet = $data->sujet;
     $rdv->date = $data->date;
     $rdv->creneau = $data->creneau;
+    $rdv->sujet = $data->sujet;
     $rdv->client_Id = $data->client_Id;
 
     if ($rdv->creer_rdv()) {
