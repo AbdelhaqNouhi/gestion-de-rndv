@@ -14,13 +14,8 @@
                         v-model="form.date"
                     />
                     <label>Creneau</label>
-                    <select class="go">
-                        <option v-for="time in times" :key="time.date"></option>
-                        <!-- <option>{{time.data}}</option> -->
-                        <option>11 h à 11:30h</option>
-                        <option>14 h à 14:30h</option>
-                        <option>15 h à 15:30h</option>
-                        <option>16 h à 16:30h</option>
+                    <select v-model="form.creneau" class="go">
+                        <option v-for="time in times" :key="time.date">{{time.date}}</option>
                     </select>
                     <label>Sujet</label>
                     <textarea
@@ -67,8 +62,6 @@ import Footer from "../components/Footer";
 
 const client_Id = Cookies.get("id");
 
-const  dele = document.getElementById("id");
-
 export default {
     name: "Reservation",
     components: {
@@ -87,6 +80,7 @@ export default {
                 {date: "15 h à 15:30h"},
                 {date: "16 h à 16:30h"}, 
             ],
+            time_creneau: [],
         };
     },
 
@@ -104,7 +98,7 @@ export default {
         },
         Reserve() {
             fetch(
-                "http://localhost/gestion-rndv/back-end/controllers/C-creer_rdv.php",
+                `http://localhost/gestion-rndv/back-end/controllers/C-creer_rdv.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -115,9 +109,9 @@ export default {
         },
         Delete(id) {
             fetch(
-                "http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php",
+                `http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php`,
                 {
-                    method: "delete",
+                    method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ id: id }),
                 }
@@ -129,7 +123,9 @@ export default {
             )
             .then((res) => res.json())
             .then((data) => {
-                    console.log(data);
+                    this.time_creneau = data;
+
+                    console.log(this.time_creneau);
             });
         },
     },
