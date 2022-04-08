@@ -25,7 +25,7 @@ export default {
         Dashboardadmin
     }, 
 }
-</script>
+</script>&
 <style scoped>
 .body{
     display: flex;

@@ -34,10 +34,10 @@ export default {
             fetch("http://localhost/gestion-rndv/back-end/controllers/C-loginClient.php", {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    reference_client: this.reference_client,
+                    reference_client: this.reference_client
                 })
             })
             .then((res) => res.json())

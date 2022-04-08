@@ -22,6 +22,13 @@ CREATE TABLE IF NOT EXISTS RDV
     FOREIGN KEY (client_Id) REFERENCES client(id)
 );
 
+CREATE TABLE IF NOT EXISTS creneau
+(
+    time_creneau VARCHAR(255),
+    rdv_creneau VARCHAR(255),
+    FOREIGN KEY (rdv_creneau ) REFERENCES RDV(creneau )
+);
+
 CREATE TABLE IF NOT EXISTS admin 
 (
     id int PRIMARY KEY AUTO_INCREMENT,
