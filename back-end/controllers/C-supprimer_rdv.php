@@ -21,7 +21,7 @@
     // get data
     $data = json_decode(file_get_contents("php://input"));
 
-    $rdv->id = $data->id;
+    $rdv->id = $_GET['id'];
 
     if ($rdv->supprimer_rdv()) {
         echo json_encode

@@ -30,7 +30,7 @@
 <script>
 import Nav from "../components/Nav";
 import Footer from './Footer.vue';
-
+import swal from 'sweetalert';
 export default {
     name: "Sing_up",
     components: {
@@ -49,16 +49,17 @@ export default {
     },
     methods: {
     login(){
-        this.$router.replace("/")
+        this.$router.replace("/");
     },
     register_client() {
-        this.regester = true;
-        fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
-            method: "post",
+      if(this.nom != "" && this.prenom != "" && this.age != "" && this.profession != ""){
+      fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
+        method: "post",
         headers: {
             "Content-type": "application/json",
         },
         body: JSON.stringify({
+          
           nom: this.nom,
           prenom: this.prenom,
           age: this.age,
@@ -67,8 +68,18 @@ export default {
         }),
       })
         .then((res) => res.json())
-        // .then((data) => alert(data));
-        
+        .then((data) => 
+           {
+               swal({
+                  title: "Register Successfuly",
+                  text: "your reference_client is " + data,
+                  icon: "success",
+                  button: "ok",
+               });
+           }
+        );
+        this.$router.push('/');
+        }
     },
   },
 }

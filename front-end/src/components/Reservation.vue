@@ -67,6 +67,8 @@ import Footer from "../components/Footer";
 
 const client_Id = Cookies.get("id");
 
+const  dele = document.getElementById("id");
+
 export default {
     name: "Reservation",
     components: {
@@ -108,13 +110,14 @@ export default {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(this.form),
                 }
+                
             ).then((res) => res.json());
         },
         Delete(id) {
             fetch(
                 "http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php",
                 {
-                    method: "POST",
+                    method: "delete",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ id: id }),
                 }
@@ -148,7 +151,7 @@ export default {
 .sing_up {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    height: 35rem;
     border-radius: 0.5rem;
 
     @media only screen and(min-width: 992px) {

@@ -18,10 +18,38 @@
             $this->conn = $DB;
         }
 
+        public function lire_client() {
+            $sql = "SELECT * FROM client";
+
+            // prepare request
+            $stmt = $this->conn->prepare($sql);
+
+            // exectute  
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function lire_unclient()
+        {
+            $sql = "SELECT * FROM client WHERE id=:id";
+
+            // prepare request
+            $stmt = $this->conn->prepare($sql);
+
+            //bind data
+            $stmt->bindParam(':id', $this->id);
+
+            // exectute  
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function Modifier_Client()
         {
             // request
-            $sql = "UPDATE rdv SET nom=:nom, prenom=:prenom, age=:age, profession=:profession, reference_client=:reference_client WHERE id=:id";
+            $sql = "UPDATE client SET nom=:nom, prenom=:prenom, age=:age, profession=:profession, reference_client=:reference_client WHERE id=:id";
 
             // prepare request
             $stmt = $this->conn->prepare($sql);
@@ -35,7 +63,7 @@
             $stmt->bindParam(':reference_client', $this->reference_client);
 
             // exectute  
-            return $stmt->execute();;
+            return $stmt->execute();
         }
 
         public function supprimer_client()
@@ -52,4 +80,6 @@
             // exectute  
             return $stmt->execute();
         }
+
+
     }

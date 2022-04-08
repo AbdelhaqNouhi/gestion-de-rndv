@@ -2,32 +2,16 @@
     <nav>
     <div class="container navbar">
         <h1 class="col-4">{{title}}</h1>
-            <router-link v-if="clientId" to="Reservation">Reservation</router-link>
-            <!-- "{name:'Reservation' ,params:{username: 'erina' }}" -->
-            <router-link to="Sing_up" v-if="!clientId"><button>Regester</button></router-link>
-            <button @click="logout" v-if="clientId" >logout</button>
+            <!-- <a class="mrgend" @click="logout_admin()">
+                <i class="fas fa-sign-in-alt sign-in-icon"><span class="mx-1">logout</span></i>
+            </a> -->
     </div>
     </nav>
 </template>
 
 <script>
-import Cookies from "js-cookie";
-
 export default {
-    name: "Nav",
-    inject:["clientId","setClientId"],
-    data(){
-        return {
-            clientId: this.clientId
-        }
-    },
-    methods:{
-        logout(){
-            Cookies.remove("id");
-            this.setClientId("");
-            this.$router.replace("/")
-        }
-    },
+    name: "NavDash",
     props:{
         title: String,
     },
@@ -67,5 +51,10 @@ nav {
         color: white;
         background-color: #1A374D;
     }
+}
+.mrgend {
+    margin-left: 91%;
+    font-size: 20px;
+    color: black;
 }
 </style>
