@@ -19,7 +19,7 @@ export default {
         // Reservation,
     }, 
 }
-</script>
+</script>&
 <style scoped>
 .body{
     display: flex;

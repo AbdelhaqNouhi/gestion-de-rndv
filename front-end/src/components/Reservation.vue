@@ -14,14 +14,13 @@
                         v-model="form.date"
                     />
                     <label>Creneau</label>
-                    <select class="go" v-model="form.creneau">
-                        <option disabled value="">Please Select</option>
-                        <option>10 h à 10:30h</option>
+                    <select class="go">
+                        <option v-for="time in times" :key="time.date"></option>
+                        <!-- <option>{{time.data}}</option> -->
                         <option>11 h à 11:30h</option>
                         <option>14 h à 14:30h</option>
                         <option>15 h à 15:30h</option>
                         <option>16 h à 16:30h</option>
-
                     </select>
                     <label>Sujet</label>
                     <textarea
@@ -46,8 +45,12 @@
                         <span>{{ list.sujet }}</span>
 
                         <div v-if="lists" class="btn">
-                            <button class="btn botton" @click="Update">update</button>
-                            <button class="btn botton" @click="Delete(list.id)">delete</button>
+                            <button class="btn botton" @click="Update">
+                                update
+                            </button>
+                            <button class="btn botton" @click="Delete(list.id)">
+                                delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -74,17 +77,36 @@ export default {
         return {
             form: { date: "", creneau: "", sujet: "", client_Id: client_Id },
             lists: [],
-            id:  null,
+            id: null,
+            times: [
+                {date: "10 h à 10:30h"},
+                {date: "11 h à 11:30h"},
+                {date: "14 h à 14:30h"},
+                {date: "15 h à 15:30h"},
+                {date: "16 h à 16:30h"}, 
+            ],
         };
     },
+
     methods: {
+        Get_rdv() {
+            this.id = Cookies.get("id");
+            // console.log(this.id);
+            fetch(
+                `http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php?id=${this.id}`
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    this.lists = data;
+                });
+        },
         Reserve() {
             fetch(
                 "http://localhost/gestion-rndv/back-end/controllers/C-creer_rdv.php",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(this.form)
+                    body: JSON.stringify(this.form),
                 }
             ).then((res) => res.json());
         },
@@ -98,18 +120,19 @@ export default {
                 }
             ).then((res) => res.json());
         },
-    },
-
-    mounted() {
-        this.id = Cookies.get("id");
-        console.log(this.id)
-        fetch(
-            `http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php?id=${this.id}`
-                // console.log(id)
-            ).then((res) => res.json())
+        Get_date_rdv () {
+            fetch(
+                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php`,
+            )
+            .then((res) => res.json())
             .then((data) => {
-                this.lists = data;
+                    console.log(data);
             });
+        },
+    },
+    mounted() {
+        this.Get_rdv();
+        this.Get_date_rdv();
     },
 };
 </script>
