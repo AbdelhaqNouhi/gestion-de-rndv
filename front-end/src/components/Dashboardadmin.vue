@@ -1,6 +1,5 @@
 <template>
     <!-- <div class="container"> -->
-    <NavDash />
     <center><h1 class="my-5">Welcom to dashboard</h1></center>
     <div cl ass="row my-5">
         <div class="col-md-12 mx-auto">
@@ -15,9 +14,6 @@
                             <th scope="col">Age</th>
                             <th scope="col">Profession</th>
                             <th scope="col">reference_client</th>
-                            <th scope="col">sujet</th>
-                            <th scope="col">date</th>
-                            <th scope="col">creneau</th>
                             <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -29,13 +25,11 @@
                                 <th scope="row" class="font-weight-normal">{{ client.age }}</th>
                                 <th scope="row" class="font-weight-normal">{{ client.profession }}</th>
                                 <th scope="row" class="font-weight-normal">{{ client.reference_client }}</th>
-                                <th scope="row" class="font-weight-normal">{{ client.sujet }}</th>
-                                <th scope="row" class="font-weight-normal">{{ client.date }}</th>
-                                <th scope="row" class="font-weight-normal">{{ client.creneau }}</th>
-                                <td class="d-flex flex-row justify-content-center">
+                                <td class="d-flex flex-row">
                                     <!-- <form method="" action="" class="mx-1"> -->
                                         <!-- <input type="hidden" name="id" value=""> -->
-                                        <a class="btn btn-primary rounded-pill" @click="updateclient(client.id)"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-primary rounded-pill" @click="getclient(client.id)" data-toggle="modal"
+                                                    data-target="#updateclient"><i class="fa fa-edit"></i></a>
                                     <!-- </form> -->
                                     <!-- <form method="" action="" class="mx-1"> -->
                                         <!-- <input type="hidden" name="id" value=""> -->
@@ -49,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div v-if="condition" class="container popup">
+    <!-- <div v-if="condition" class="container popup">
         <h2 class="text-center py-4">Update client</h2>
         <div class="row justify-content-center">
             <div class="col-md-12 bg-light">
@@ -78,6 +72,46 @@
                 </form>
             </div>
         </div>
+    </div> -->
+    <div class="modal fade" id="updateclient" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update client</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <input type="text" required placeholder="nom" v-model="client.nom"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required placeholder="prenom" v-model="client.prenom"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" required placeholder="age" v-model="client.age"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required placeholder="profession" v-model="client.profession"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required placeholder="reference_client" v-model="client.reference_client"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-success" @click="updateclient()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <br>
     <br>
@@ -91,7 +125,7 @@
 </template>
 
 <script>import { throwStatement } from "@babel/types";
-import NavDash from "./NavDash";
+import Nav from "./Nav";
 import Footer from "./Footer.vue";
     export default {
     name: "Dashboardadmin",
@@ -105,10 +139,7 @@ import Footer from "./Footer.vue";
                 prenom: "",
                 age: "",
                 profession: "",
-                reference_client: "",
-                sujet: "",
-                date: "",
-                creneau: ""
+                reference_client: ""
             },
         };
     },
@@ -117,12 +148,12 @@ import Footer from "./Footer.vue";
     },
     methods: {
         getAllclient() {
-            axios.get("http://localhost/gestion-rndv/back-end/controllers/C-lire_rdv.php")
+            axios.get("http://localhost/gestion-rndv/back-end/controllers/C-lire_client.php")
                 .then(response => this.clients = response.data)
                 .catch(err => console.log(err));
         },
         deleteclient(id) {
-            axios.delete("http://localhost/gestion-rndv/back-end/controllers/C-supprimer_rdv.php?id=" + id)
+            axios.delete("http://localhost/gestion-rndv/back-end/controllers/C-supprimer_client.php?id=" + id)
                 .then(() => {
                 this.clients = this.clients.filter(client => {
                     return client.id !== id;
@@ -136,29 +167,35 @@ import Footer from "./Footer.vue";
             Cookies.remove("reference_admin");
             this.$router.push("/");
         },
-        // updateclient(id) {
-        //     axios.put("http://localhost/gestion-rndv/back-end/controllers/C-modifier_client.php", {
-        //         id: this.client.id,
-        //         nom: this.client.nom,
-        //         prenom: this.client.prenom,
-        //         age: this.client.age,
-        //         profession: this.client.profession,
-        //         reference_client: this.client.reference_client
-        //     })
-        //     .catch(err => console.log(err));
-        // },
-        updateclient(id) {
-            this.condition = !this.condition;
-            axios.put("http://localhost/gestion-rndv/back-end/controllers/C-modifier_client.php?id="+ id)
-                .then(response => {
-                    console.log(response);
+        updateclient() {
+            // this.condition = !this.condition;
+            axios.put('http://localhost/gestion-rndv/back-end/controllers/C-modifier_client.php', {
+                id : this.client.id,
+                nom : this.client.nom,
+                prenom : this.client.prenom,
+                age : this.client.age,
+                profession : this.client.profession,
+                reference_client : this.client.reference_client
+            })
+                .then(() => {
+                    Swal.fire(
+                        'Updated !',
+                        'success'
+                    ).then(() => {
+                        this.getclients(); 
+                        ('#updateclient').modal('hide')
+                    })
                 })
-                .catch(function (error) {
-                console.log(error.response)
-                })
+                .catch(err => console.log(err));
+        },
+        getclient(id) {
+            axios.post('http://localhost/gestion-rndv/back-end/controllers/C-lireun_client.php?id=' + id)
+                .then(response => { this.client = response.data;
+            })
+                .catch(err => console.log(err));
         },
     },
-    components: { Footer, NavDash }
+    components: { Footer, Nav }
 }
 </script>
 

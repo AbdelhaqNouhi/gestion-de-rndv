@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
 import { ref } from "vue";
 import swal from 'sweetalert';
 import Cookies from 'js-cookie';
@@ -75,7 +74,8 @@ export default {
             if ((this.reference_admin == data.reference_admin.reference_admin)) {
                 // console.log(data.reference_admin.reference_admin);
                 // console.log(reference_admin);
-                Cookies.set('reference_admin',data.reference_admin.reference_admin);
+                Cookies.set('admin_id',data.reference_admin.id);
+                this.setClientId(data.reference_admin.id);
                 this.$router.push('/Dashboardadmin');
             }else{
                 swal({
@@ -150,7 +150,7 @@ form{
     background-color: #1A374D;
 }
 .margadm {
-    margin-top: 114px;
+    margin-top: 147px;
     margin-left: 10%;
     width: 80%;
 }

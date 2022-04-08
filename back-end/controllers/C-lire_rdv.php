@@ -20,7 +20,6 @@
 
     // get donnée
 
-
     $rdv->id = $_GET["id"];
     
     $result = $rdv->lire_rdv();

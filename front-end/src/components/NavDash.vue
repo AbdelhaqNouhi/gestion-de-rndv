@@ -2,9 +2,9 @@
     <nav>
     <div class="container navbar">
         <h1 class="col-4">{{title}}</h1>
-            <a class="mrgend" @click="logout_admin()">
+            <!-- <a class="mrgend" @click="logout_admin()">
                 <i class="fas fa-sign-in-alt sign-in-icon"><span class="mx-1">logout</span></i>
-            </a>
+            </a> -->
     </div>
     </nav>
 </template>

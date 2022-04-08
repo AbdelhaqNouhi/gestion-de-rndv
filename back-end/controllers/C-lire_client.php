@@ -9,27 +9,25 @@
 
     // include database et rdv model
     include_once '../database/DB.php';
-    include_once '../models/M-RDV.php';
+    include_once '../models/M-Admin.php';
 
     // Instansiation Database 
     $database = new DB();
     $db = $database->connect();
 
     // Instansiation  
-    $rdv = new RDV($db);
+    $client = new ADMIN($db);
 
-    // get donnée
+    // get data
     $data = json_decode(file_get_contents("php://input"));
 
-    $result = $rdv->lireun_rdv();
+    $result = $client->lire_client();
     if ($result) {
         echo json_encode(
             $result
         );
     } else {
         echo json_encode(
-            array("Ton rendez-vous" => $result)
+            array("Les clients" => $result)
         );
     }
-
-?>

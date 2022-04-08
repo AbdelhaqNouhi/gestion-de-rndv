@@ -3,13 +3,13 @@
     // Headers 
 
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: applecation/json');
-    header('Access-Control-Allow-Methods: PUT');
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: GET');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Headers, Authorization, X-Requested-Width');
 
     // include database et rdv model
     include_once '../database/DB.php';
-    include_once '../models/M-Admin.php';
+    include_once '../models//M-Admin.php';
 
     // Instansiation Database 
     $database = new DB();
@@ -21,21 +21,16 @@
     // get donnée
     $data = json_decode(file_get_contents("php://input"));
 
-    // push data into properties
     $client->id = $data->id;
-    $client->nom = $data->nom;
-    $client->prenom = $data->prenom;
-    $client->age = $data->age;
-    $client->profession = $data->profession;
-    $client->reference_client = $data->reference_client;
 
-    if ($client->Modifier_Client()) {
+    $result = $client->lire_unclient();
+    if ($result) {
         echo json_encode(
-            array('message' => "la modification a été effectuer")
+            $result
         );
     } else {
         echo json_encode(
-            array('message' => "la modification n'a pas été effectuer")
+            array("Ton client" => $result)
         );
     }
 

@@ -21,8 +21,8 @@
     // get data
     $data = json_decode(file_get_contents("php://input"));
 
-    $client->id = $data->id;
-    // $client->id = $_GET['id'];
+    // $client->id = $data->id;
+    $client->id = $_GET['id'];
 
     if ($client->supprimer_client()) {
         echo json_encode

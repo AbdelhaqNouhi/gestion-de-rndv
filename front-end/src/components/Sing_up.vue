@@ -49,7 +49,7 @@ export default {
     },
     methods: {
     login(){
-        this.$router.replace("/")
+        this.$router.replace("/");
     },
     register_client() {
       if(this.nom != "" && this.prenom != "" && this.age != "" && this.profession != ""){

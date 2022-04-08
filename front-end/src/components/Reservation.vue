@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Nav title="Reserve Now" />
         <div class="hh">
             <div class="col-11 col-lg-10 p-0 sing_up">
                 <form class="form" @submit.prevent="Reserve">

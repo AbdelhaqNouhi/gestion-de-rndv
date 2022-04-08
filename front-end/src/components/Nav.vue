@@ -5,7 +5,7 @@
             <router-link v-if="clientId" to="Reservation">Reservation</router-link>
             <!-- "{name:'Reservation' ,params:{username: 'erina' }}" -->
             <router-link to="Sing_up" v-if="!clientId"><button>Regester</button></router-link>
-            <button @click="logout" v-if="clientId">logout</button>
+            <button @click="logout" v-if="clientId" >logout</button>
     </div>
     </nav>
 </template>

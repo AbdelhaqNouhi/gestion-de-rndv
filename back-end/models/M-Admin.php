@@ -18,8 +18,32 @@
             $this->conn = $DB;
         }
 
-        public function lireun_client() {
-            
+        public function lire_client() {
+            $sql = "SELECT * FROM client";
+
+            // prepare request
+            $stmt = $this->conn->prepare($sql);
+
+            // exectute  
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function lire_unclient()
+        {
+            $sql = "SELECT * FROM client WHERE id=:id";
+
+            // prepare request
+            $stmt = $this->conn->prepare($sql);
+
+            //bind data
+            $stmt->bindParam(':id', $this->id);
+
+            // exectute  
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function Modifier_Client()

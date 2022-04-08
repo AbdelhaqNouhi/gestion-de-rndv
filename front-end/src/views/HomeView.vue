@@ -1,6 +1,5 @@
 <template>
 <div class="body">
-    <Nav title="Reserve Now"/>
     <Login />
     <br>
     <br>
