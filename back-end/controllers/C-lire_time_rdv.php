@@ -3,7 +3,7 @@
     header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: GET');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Headers, Authorization, X-Requested-Width');
-    // if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') die(); 
+    if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') die(); 
     
     include_once '../database/DB.php';
     include_once '../models/M-RDV.php';
@@ -13,8 +13,10 @@
 
     $rdv = new RDV($db);
 
-    $data = json_decode(file_get_contents("php://input"));
-
+    // $rdv->id  = $_GET["id"];
+    
+    // $data = json_decode(file_get_contents("php://input"));
+    
     $result = $rdv->read_date_rdv();
 
     if ($result) {

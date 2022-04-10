@@ -12,10 +12,14 @@
                         placeholder="Date"
                         required
                         v-model="form.date"
+                        :min="new Date().toISOString().substr(0, 10)"
                     />
+
                     <label>Creneau</label>
                     <select v-model="form.creneau" class="go">
-                        <option v-for="time in times" :key="time.date">{{time.date}}</option>
+                        <option v-for="time in times" :key="time.date">
+                            {{ time.date }}
+                        </option>
                     </select>
                     <label>Sujet</label>
                     <textarea
@@ -61,7 +65,6 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
 const client_Id = Cookies.get("id");
-
 export default {
     name: "Reservation",
     components: {
@@ -74,17 +77,20 @@ export default {
             lists: [],
             id: null,
             times: [
-                {date: "10 h à 10:30h"},
-                {date: "11 h à 11:30h"},
-                {date: "14 h à 14:30h"},
-                {date: "15 h à 15:30h"},
-                {date: "16 h à 16:30h"}, 
+                { date: "10 h à 10:30h" },
+                { date: "11 h à 11:30h" },
+                { date: "14 h à 14:30h" },
+                { date: "15 h à 15:30h" },
+                { date: "16 h à 16:30h" },
             ],
             time_creneau: [],
         };
     },
-
     methods: {
+        filter_ceeneau () {
+
+        },
+
         Get_rdv() {
             this.id = Cookies.get("id");
             // console.log(this.id);
@@ -104,7 +110,6 @@ export default {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(this.form),
                 }
-                
             ).then((res) => res.json());
         },
         Delete(id) {
@@ -117,16 +122,17 @@ export default {
                 }
             ).then((res) => res.json());
         },
-        Get_date_rdv () {
-            fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php`,
-            )
-            .then((res) => res.json())
-            .then((data) => {
-                    this.time_creneau = data;
+         async Get_date_rdv() {
+            const res = await fetch(
+                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php`
+            );
+            const result = await res.json();
+            this.time_creneau = result;
+            const val = this.times;
 
-                    console.log(this.time_creneau);
-            });
+            const available = val.filter((i) => !result.includes(i));
+
+            console.log(available);
         },
     },
     mounted() {
@@ -149,7 +155,6 @@ export default {
     flex-direction: column;
     height: 35rem;
     border-radius: 0.5rem;
-
     @media only screen and(min-width: 992px) {
         display: flex;
         flex-direction: row;
@@ -161,7 +166,6 @@ export default {
     height: 100%;
     width: 100%;
     background-color: #6998ab;
-
     .title {
         padding: 1rem 0;
         border: 1px solid white;
@@ -173,7 +177,6 @@ export default {
         text-align: center;
     }
 }
-
 .form {
     padding: 2rem;
     height: 100%;
@@ -181,7 +184,6 @@ export default {
     border-radius: 0.5rem;
     background-color: #b1d0e0;
     // width: 5rem;
-
     h3 {
         padding: 0rem 0 2rem;
         text-align: center;
@@ -195,7 +197,6 @@ export default {
     padding: 0.5rem 0.5rem;
     font-size: 14px;
 }
-
 .botton {
     color: white;
     background-color: #1a374d;

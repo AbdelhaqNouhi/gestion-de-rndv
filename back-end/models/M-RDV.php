@@ -89,7 +89,7 @@
 
         public function read_date_rdv ()
         {
-            $sql = "SELECT date FROM rdv";
+            $sql = "SELECT creneau FROM rdv";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

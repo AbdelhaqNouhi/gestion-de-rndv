@@ -83,25 +83,33 @@ export default {
     margin: 82px 0;
 }
 .sing_up{
-    // height: 20rem;
     border-radius: 0.5rem;
     display: flex;
-    background-color: #B1D0E0;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    border-radius: 0.5rem;
+    //  background-color: #B1D0E0;
+    @media only screen and(min-width: 992px) {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        background-color: #B1D0E0;
+
+    }
 }
 .description{
     display: flex;
-    justify-content: center;
     flex-direction: column;
     gap: 5rem;
-    display: none;
-    border-radius: 0rem 0.5rem 0.5rem 8rem;
+    // display: none;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
     height: 100%;
     width: 100%;
-    background-color: #6998AB;
     padding: 2rem;
 
   @media only screen and(min-width: 992px){
-      display: block;
+    background-color: #6998AB;
+    border-radius: 0rem 0.5rem 0.5rem 8rem;
    }
 
     span{
@@ -117,6 +125,8 @@ form{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background-color: #B1D0E0;
+
     // width: 5rem;
     h3{
         margin-bottom: 1rem;
