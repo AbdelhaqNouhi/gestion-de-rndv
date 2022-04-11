@@ -2,7 +2,7 @@
 <div>
     <div class="hh">
         <div class="col-11 col-lg-7 p-0 sing_up">
-            <form>
+            <form @submit.prevent="register">
                 <h3>Sing_up</h3>
                 <label>Nom</label>
                 <input required type="text" name="nom" placeholder="Nom" v-model="nom">
@@ -12,10 +12,10 @@
                 <input required type="text" name="age" placeholder="Age" v-model="age">
                 <label>Profession</label>
                 <input required type="text" name="profession" placeholder="Profession" v-model="profession">
-                <input href="./Login.vue" class="botton" type="submit" name="regester" value="Regester" @click.prevent="register_client">
+                <input class="botton" type="submit" name="regester" value="Regester">
             </form>
             <div class="description">
-                <div v-if="regester" class="rf">
+                <div v-if="show" class="rf">
                     <strong>your Reference</strong>
                     <p>{{this.nom + this.age}}</p>
                     <button class="botton" @click="login">log in</button>
@@ -30,7 +30,6 @@
 <script>
 import Nav from "../components/Nav";
 import Footer from './Footer.vue';
-import swal from 'sweetalert';
 export default {
     name: "Sing_up",
     components: {
@@ -44,41 +43,31 @@ export default {
             age: "",
             profession: "",
             reference_client: "",
-            regester: false,
+            show: false,
         };
     },
     methods: {
     login(){
         this.$router.replace("/");
     },
-    register_client() {
+    register() {
       if(this.nom != "" && this.prenom != "" && this.age != "" && this.profession != ""){
-      fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
-        method: "post",
-        headers: {
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          
-          nom: this.nom,
-          prenom: this.prenom,
-          age: this.age,
-          profession: this.profession,
-          reference_client: this.nom + this.age
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => 
-           {
-               swal({
-                  title: "Register Successfuly",
-                  text: "your reference_client is " + data,
-                  icon: "success",
-                  button: "ok",
-               });
-           }
-        );
-        this.$router.push('/');
+        fetch("http://localhost/gestion-rndv/back-end/controllers/C-registerClient.php", {
+            method: "post",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+            
+            nom: this.nom,
+            prenom: this.prenom,
+            age: this.age,
+            profession: this.profession,
+            reference_client: this.nom + this.age
+            }),
+        })
+            .then((res) => res.json())
+            .then(()=>this.show = true)
         }
     },
   },
@@ -94,25 +83,33 @@ export default {
     margin: 82px 0;
 }
 .sing_up{
-    // height: 20rem;
     border-radius: 0.5rem;
     display: flex;
-    background-color: #B1D0E0;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    border-radius: 0.5rem;
+    //  background-color: #B1D0E0;
+    @media only screen and(min-width: 992px) {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        background-color: #B1D0E0;
+
+    }
 }
 .description{
     display: flex;
-    justify-content: center;
     flex-direction: column;
     gap: 5rem;
-    display: none;
-    border-radius: 0rem 0.5rem 0.5rem 8rem;
+    // display: none;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
     height: 100%;
     width: 100%;
-    background-color: #6998AB;
     padding: 2rem;
 
   @media only screen and(min-width: 992px){
-      display: block;
+    background-color: #6998AB;
+    border-radius: 0rem 0.5rem 0.5rem 8rem;
    }
 
     span{
@@ -128,6 +125,8 @@ form{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background-color: #B1D0E0;
+
     // width: 5rem;
     h3{
         margin-bottom: 1rem;
