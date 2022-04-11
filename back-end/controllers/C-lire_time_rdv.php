@@ -13,7 +13,9 @@
 
     $rdv = new RDV($db);
 
-    // $rdv->id  = $_GET["id"];
+    $rdv->date  = $_GET["date"];
+    // var_dump($rdv->date);
+    // die();
     
     // $data = json_decode(file_get_contents("php://input"));
     

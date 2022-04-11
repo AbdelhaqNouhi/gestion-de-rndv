@@ -6,6 +6,7 @@
                     <h3>Reserve Now</h3>
                     <label>Date</label>
                     <input
+                    @change="Get_date_rdv"
                         class="go"
                         type="date"
                         name="date"
@@ -14,13 +15,13 @@
                         v-model="form.date"
                         :min="new Date().toISOString().substr(0, 10)"
                     />
+                        <label>Creneau</label>
+                        <select v-if="this.form.date" v-model="form.creneau" class="go">
+                            <option v-for="time in times" :key="time.date">
+                                {{ time.date }}
+                            </option>
+                        </select>
 
-                    <label>Creneau</label>
-                    <select v-model="form.creneau" class="go">
-                        <option v-for="time in times" :key="time.date">
-                            {{ time.date }}
-                        </option>
-                    </select>
                     <label>Sujet</label>
                     <textarea
                         class="go"
@@ -123,16 +124,15 @@ export default {
             ).then((res) => res.json());
         },
          async Get_date_rdv() {
+             let date = this.form.date;
             const res = await fetch(
-                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php`
+                `http://localhost/gestion-rndv/back-end/controllers/C-lire_time_rdv.php?date=${date}`   
             );
             const result = await res.json();
-            this.time_creneau = result;
-            const val = this.times;
-
-            const available = val.filter((i) => !result.includes(i));
-
-            console.log(available);
+            if(result != "errore"){
+                this.time_creneau = result.map(r => r.creneau);
+                this.times =  this.times.filter((i) => !this.time_creneau.includes(i.date));
+            }
         },
     },
     mounted() {

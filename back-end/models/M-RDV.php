@@ -89,8 +89,9 @@
 
         public function read_date_rdv ()
         {
-            $sql = "SELECT creneau FROM rdv";
+            $sql = "SELECT creneau FROM rdv WHERE date =:date";
             $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':date', $this->date);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
