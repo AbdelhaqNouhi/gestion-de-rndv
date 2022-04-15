@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS client
 CREATE TABLE IF NOT EXISTS RDV 
 (
     id int PRIMARY KEY AUTO_INCREMENT,
+    sujet varchar(250),
     date DATE NOT NULL,
     creneau varchar(250),
-    sujet varchar(250),
     client_Id INT NOT NULL,
     FOREIGN KEY (client_Id) REFERENCES client(id)
 );
